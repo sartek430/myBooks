@@ -17,21 +17,17 @@ Techno:
 - **test**: is for experimenting outside of an issue/ticket
 - **docs**: is for writing, updating, or fixing documentation
 
-### Reference
-
-After the category, there should be a "/" followed by the reference of the issue/ticket you are working on. If there's no reference, just add "no-ref".
-
 ### Description
 
-After the reference, there should be another "/" followed by a description which sums up the purpose of this specific branch. This description should be short and "kebab-cased".
+After the category, there should be a "/" followed by a description which sums up the purpose of this specific branch. This description should be short and "kebab-cased".
 
 ### Examples:
 
-- You need to add, refactor or remove a feature: **`git branch feature/issue-42/create-new-button-component`**
-- You need to fix a bug: **`git branch bugfix/issue-342/button-overlap-form-on-mobile`**
-- You need to fix a bug really fast (possibly with a temporary solution): **`git branch hotfix/no-ref/registration-form-not-working`**
-- You need to experiment outside of an issue/ticket: **`git branch test/no-ref/refactor-components-with-atomic-design`**
-- You need to update documentations **`git branch docs/no-ref/update-readme`**
+- You need to add, refactor or remove a feature: **`git branch feature/create-new-button-component`**
+- You need to fix a bug: **`git branch bugfix/button-overlap-form-on-mobile`**
+- You need to fix a bug really fast (possibly with a temporary solution): **`git branch hotfix/registration-form-not-working`**
+- You need to experiment outside of an issue/ticket: **`git branch test/refactor-components-with-atomic-design`**
+- You need to update documentations **`git branch docs/update-readme`**
 
 # Commit name convention
 
