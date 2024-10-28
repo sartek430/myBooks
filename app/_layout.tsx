@@ -7,6 +7,9 @@ import {
 import { Quicksand_400Regular } from "@expo-google-fonts/quicksand"; // body
 import { Slot } from "expo-router";
 
+import { TamaguiProvider } from "tamagui";
+import { tamaguiConfig } from "../tamagui.config"; // your configuration
+
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -25,7 +28,11 @@ const RootLayout = () => {
     return null;
   }
 
-  return <Slot />;
+  return (
+    <TamaguiProvider config={tamaguiConfig}>
+      <Slot />
+    </TamaguiProvider>
+  );
 };
 
 export default RootLayout;
