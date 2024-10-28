@@ -29,9 +29,9 @@ const RootLayout = () => {
   }
 
   return (
-    <TamaguiProvider config={tamaguiConfig}>
-      <Slot />
-    </TamaguiProvider>
+    // <TamaguiProvider config={tamaguiConfig}>
+    <Slot />
+    // </TamaguiProvider>
   );
 };
 

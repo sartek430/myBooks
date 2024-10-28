@@ -31,7 +31,7 @@ npm run start
 - Importer les couleurs ✅
 - Installer tamagui (couleurs et le theming) ✅
 - Installer expo router ✅ https://docs.expo.dev/router/introduction/
-- Incorporer firebase
+- Incorporer firebase ✅ (reste à associer à la console firebase)
 
 ### Features
 
