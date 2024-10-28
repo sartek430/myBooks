@@ -1,31 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import {
-  useFonts,
-  PTSansCaption_400Regular,
-} from "@expo-google-fonts/pt-sans-caption"; // title
-import { Quicksand_400Regular } from "@expo-google-fonts/quicksand"; // body
 
-SplashScreen.preventAutoHideAsync();
-
-export default function App() {
-  const [loaded, error] = useFonts({
-    PtSansCaption: PTSansCaption_400Regular,
-    Quicksand: Quicksand_400Regular,
-  });
-
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
-
+const Page = () => {
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
@@ -38,7 +14,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,3 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default Page;
