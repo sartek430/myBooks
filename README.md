@@ -27,7 +27,7 @@ npm run start
 - Installer les gestures et reanimated etc
 - Installer les icons ✅
 - Installer les fonts ✅
-- Load les fonts
+- Load les fonts ✅
 - Importer les couleurs ✅
 - Voir tamagui pour les couleurs et le theming
 - Installer expo router
