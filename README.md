@@ -1,6 +1,67 @@
 # myBooks
 
-Techno:
+### **Projet 6 : Application de gestion de bibliothèque personnelle**
+
+- **Description** : application où les utilisateurs peuvent répertorier leurs livres, ajouter des commentaires, et suivre les livres qu'ils ont lus, qu'ils sont en train de lire, ou qu'ils souhaitent lire.
+
+### Présentation projet
+
+- Rédiger un document de présentation du projet (une page récapitulative des fonctionnalités, architecture choisie, technologies et packages utilisés).
+
+### Guide utilisateur
+
+- Rédiger un guide utilisateur pour expliquer comment utiliser l'application.
+
+### Installation
+
+- Fournir un guide d’installation pour exécuter l’application en local (pré-requis, installation, etc). (dans le README)
+
+```bash
+git clone https://github.com/sartek430/myBooks
+cd myBooks
+npm run start
+```
+
+### Feuille de route
+
+- Installer les gestures et reanimated etc
+- Installer les icons
+- Installer les fonts
+- Load les fonts
+- Importer les couleurs
+- Voir tamagui pour les couleurs et le theming
+- Installer expo router
+- Incorporer firebase
+
+### Features
+
+auth et stockage en temps réel firebase
+
+- Inscription et connexion sur la plateforme.
+- Recherche générale (titre, auteur) de livre. (barre de recherche, titre ou author. renvoie sous forme tableau les résultats. clique pour afficher détail)
+- Ajout de livre à ma collection de livre.
+- Ajout de commentaire sur mes livres.
+- Ajout d'un état de lecture sur un livre (à lire, en cours de lecture, lecture terminée. (état de livre : à lire, en cours, fini))
+- Modification information de compte + suppression de compte (avatar sur app bar pour modification information compte)
+
+### Navigation
+
+Utilisation de expo router car bien plus simple pour la navigation. pas besoin de spécifier toutes les interfaces de react navigation. File bases routing, group folder etc
+
+Bottom tabs navigation + stack navigation
+exemple de tab avec stack, chaque tab prend un stack navigator
+https://reactnavigation.org/docs/tab-based-navigation/#a-stack-navigator-for-each-tab
+
+- Tabs
+- - Home page (stack navigation)
+- - - Search page : affichage des livres selon la recherche. Clique sur un livre pour afficher son détail.
+- - - Detail page : détail d'un livre, ajout à ma collection.
+
+- - Library page (stack navigation)
+- - - List page : Mes livres présent dans ma collection, clique sur un livre pour afficher un détail moins poussé.
+- - - Detail page : détail d'un livre, suivi d'état de lecture.
+
+### Techno
 
 - Expo Blank TS
 - Package Google Fonts (@expo-google-fonts/)
