@@ -25,12 +25,12 @@ npm run start
 ### Feuille de route
 
 - Installer les gestures et reanimated etc
-- Installer les icons ✅
+- Installer les icons ✅ https://icons.expo.fyi/Index
 - Installer les fonts ✅
 - Load les fonts ✅
 - Importer les couleurs ✅
 - Voir tamagui pour les couleurs et le theming
-- Installer expo router
+- Installer expo router ✅ https://docs.expo.dev/router/introduction/
 - Incorporer firebase
 
 ### Features
