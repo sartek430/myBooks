@@ -25,10 +25,10 @@ npm run start
 ### Feuille de route
 
 - Installer les gestures et reanimated etc
-- Installer les icons
-- Installer les fonts
+- Installer les icons ✅
+- Installer les fonts ✅
 - Load les fonts
-- Importer les couleurs
+- Importer les couleurs ✅
 - Voir tamagui pour les couleurs et le theming
 - Installer expo router
 - Incorporer firebase
