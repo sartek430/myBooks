@@ -6,13 +6,13 @@ import {
 } from "@expo-google-fonts/pt-sans-caption"; // title
 import { Quicksand_400Regular } from "@expo-google-fonts/quicksand"; // body
 import { Slot } from "expo-router";
-
-import { TamaguiProvider } from "tamagui";
-import { tamaguiConfig } from "../tamagui.config"; // your configuration
+import { AuthContext } from "@/context";
 
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const { AuthProvider } = AuthContext;
+
   const [loaded, error] = useFonts({
     PtSansCaption: PTSansCaption_400Regular,
     Quicksand: Quicksand_400Regular,
@@ -29,9 +29,9 @@ const RootLayout = () => {
   }
 
   return (
-    // <TamaguiProvider config={tamaguiConfig}>
-    <Slot />
-    // </TamaguiProvider>
+    <AuthProvider>
+      <Slot />
+    </AuthProvider>
   );
 };
 
