@@ -1,17 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import BookResultCard from "../components/cards/BookResultCard";
+import { light } from "../utils/colors";
 
 const Page = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Text style={{ fontFamily: "PtSansCaption", fontSize: 20 }}>
-        Fonts : pt-sans-caption 400 regular
-      </Text>
-      <Text style={{ fontFamily: "Quicksand", fontSize: 20 }}>
-        Fonts : quicksand 400 regular
-      </Text>
-      <StatusBar style="auto" />
+      <BookResultCard
+        image={require("../assets/Seigneur des Anneaux livre.jpeg")}
+        author="J.R.R.Tolkien"
+        title="The lord of the rings"
+        stars={3}
+        date="1954"
+      />
     </View>
   );
 };
@@ -19,7 +19,7 @@ const Page = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: light.background,
     alignItems: "center",
     justifyContent: "center",
   },
