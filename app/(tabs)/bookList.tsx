@@ -1,27 +1,27 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { light } from "../utils/colors";
+import { colors } from "@/utils";
 
-const Account = () => {
+const BookList = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Account</Text>
+      <Text style={styles.title}>My Book List</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: light.secondary,
-    fontFamily: "Quicksand",
-  },
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: light.background,
+    backgroundColor: colors.light.background,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: colors.light.text,
+    fontFamily: "Quicksand",
   },
 });
 
-export default Account;
+export default BookList;
