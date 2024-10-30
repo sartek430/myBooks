@@ -6,7 +6,6 @@ import { db } from "@/services";
 // import { FirestoreUser } from "../../models/User";
 
 const Account = () => {
-<<<<<<<< HEAD:app/account.tsx
   const { user, userId } = AuthContext.useAuth();
 
   console.log("account", userId);
@@ -16,9 +15,6 @@ const Account = () => {
     console.log(data);
   };
   loadData();
-========
-  const { user } = AuthContext.useAuth();
->>>>>>>> a2ae2b9 (chore: move tabs files):app/(auth)/account.tsx
 
   return (
     <View style={styles.container}>
