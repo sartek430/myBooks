@@ -7,10 +7,10 @@ import {
   ImageSourcePropType,
   Pressable,
 } from "react-native";
-import { light } from "../../utils/colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { BookModel } from "../../models/BookModel";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { colors } from "@/utils";
 
 interface BookCardProps {
   image: ImageSourcePropType;
@@ -54,15 +54,24 @@ const BookCard: React.FC<BookCardProps> = ({
         <Text style={styles.date}>{date}</Text>
         <View style={styles.stars}>
           {[...Array(stars)].map((e, i) => (
-            <AntDesign key={i} name="star" size={24} color={light.secondary} />
+            <AntDesign
+              key={i}
+              name="star"
+              size={24}
+              color={colors.light.secondary}
+            />
           ))}
         </View>
       </View>
       <Pressable style={styles.addBook} onPress={() => addBookToBookList()}>
         {isInBookList ? (
-          <FontAwesome5 name="comment-alt" size={24} color={light.accent} />
+          <FontAwesome5
+            name="comment-alt"
+            size={24}
+            color={colors.light.accent}
+          />
         ) : (
-          <AntDesign name="pluscircleo" size={24} color={light.accent} />
+          <AntDesign name="pluscircleo" size={24} color={colors.light.accent} />
         )}
       </Pressable>
     </View>
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "PtSansCaption",
-    color: light.primary,
+    color: colors.light.primary,
   },
   title: {
     fontSize: 18,
