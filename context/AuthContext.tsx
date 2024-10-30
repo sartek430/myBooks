@@ -12,6 +12,7 @@ import { User } from "firebase/auth";
 // Typage du contexte
 type TAuthProps = {
   user: User | null; // Utilisateur connecté
+  userId: string; // ID de l'utilisateur connecté
   isLoading: boolean; // Chargement de l'utilisateur
 };
 
@@ -30,21 +31,24 @@ const useAuth = () => {
 // Fournisseur de contexte pour gérer l'état d'authentification
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [userId, setUserId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = firebase.config.auth.onAuthStateChanged((user) => {
-      console.log("onAuthStateChanged:", user);
+    const unsubscribe = firebase.config.auth.onAuthStateChanged((_user) => {
+      //   console.log("onAuthStateChanged:", _user);
+      console.log("onAuthStateChanged");
 
-      setUser(user); // Met à jour l'utilisateur
-      if (isLoading) setIsLoading(false); // Met à jour le chargement
+      setUser(_user); // Met à jour l'utilisateur
+      setUserId(_user ? _user.uid : ""); // Met à jour l'ID de l'utilisateur
+      setIsLoading(isLoading ? false : true); // Met à jour le chargement
     });
 
     return () => unsubscribe();
   }, [firebase.config.auth]);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, userId, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
