@@ -2,9 +2,19 @@ import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
 import { AuthContext } from "@/context";
 import { auth } from "@/services";
+import { db } from "@/services";
+// import { FirestoreUser } from "../../models/User";
 
 const Account = () => {
-  const { user } = AuthContext.useAuth();
+  const { user, userId } = AuthContext.useAuth();
+
+  console.log("account", userId);
+
+  const loadData = async () => {
+    const data = await db.user.me(userId!);
+    console.log(data);
+  };
+  loadData();
 
   return (
     <View style={styles.container}>
