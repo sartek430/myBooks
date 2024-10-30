@@ -2,13 +2,13 @@ import { Tabs } from "expo-router";
 import { Icons } from "@/components";
 import { colors } from "@/utils";
 
-const TabsLayout = () => {
+const AuthLayout = () => {
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: colors.light.secondary,
         tabBarInactiveTintColor: colors.light.background,
-        headerShown: false,
+        // headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.light.primary,
           //   paddingBottom: 5,
@@ -16,7 +16,7 @@ const TabsLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="search"
         options={{
           title: "BookSearch",
           tabBarIcon: ({ color }) => (
@@ -25,7 +25,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="bookList"
+        name="list"
         options={{
           title: "BookList",
           tabBarIcon: ({ color }) => (
@@ -34,7 +34,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="Account"
+        name="account"
         options={{
           title: "Account",
           tabBarIcon: ({ color }) => (
@@ -46,4 +46,4 @@ const TabsLayout = () => {
   );
 };
 
-export default TabsLayout;
+export default AuthLayout;

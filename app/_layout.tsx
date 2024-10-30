@@ -15,17 +15,6 @@ SplashScreen.preventAutoHideAsync();
 export default () => {
   const { AuthProvider } = AuthContext;
 
-  return (
-    <AuthProvider>
-      <RootLayout />
-    </AuthProvider>
-  );
-};
-
-const RootLayout = () => {
-  const { useAuth } = AuthContext;
-  const { user, isLoading } = useAuth();
-
   const [loaded, error] = useFonts({
     PtSansCaption: PTSansCaption_400Regular,
     Quicksand: Quicksand_400Regular,
@@ -41,20 +30,30 @@ const RootLayout = () => {
     return null;
   }
 
-  //   const router = useRouter();
-  //   const segments = useSegments();
+  return (
+    <AuthProvider>
+      <RootLayout />
+    </AuthProvider>
+  );
+};
 
-  //   useEffect(() => {
-  //     const inAuthGroup = segments[0] === "(auth)";
+const RootLayout = () => {
+  const { user, isLoading } = AuthContext.useAuth();
 
-  //     if (user && !inAuthGroup) {
-  //       router.replace("/");
-  //     } else if (!user && inAuthGroup) {
-  //       router.replace("/login");
-  //     }
-  //   }, [user, isLoading]);
+  const router = useRouter();
+  const segments = useSegments();
 
-  console.log("user : ", user);
+  useEffect(() => {
+    if (isLoading) return;
+
+    const inAuthGroup = segments[0] === "(auth)";
+
+    if (user && !inAuthGroup) {
+      router.replace("/(auth)/search");
+    } else if (!user && inAuthGroup) {
+      router.replace("/");
+    }
+  }, [user, isLoading]);
 
   if (isLoading) {
     return (
@@ -65,37 +64,7 @@ const RootLayout = () => {
     );
   }
 
-  //   if (!user) {
-  //     return (
-  //       //   <Stack>
-  //       //     <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-  //       //   </Stack>
-  //       //   {!isLoading && <Redirect href={"/login"} />}
-  //       <Redirect href={"/login"} />
-  //     );
-  //   }
-
-  //   if (user !== null) {
-  //     return (
-  //       <Stack>
-  //         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-  //       </Stack>
-  //     );
-  //   } else {
-  //     return (
-  //       //   <Stack>
-  //       //     <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
-  //       //   </Stack>
-  //       <Slot />
-  //       //   <Redirect href={"/login"} />
-  //     );
-  //   }
-
-  return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <Slot />;
 };
 
 const styles = StyleSheet.create({
@@ -112,5 +81,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff", // ou toute autre couleur de fond
   },
 });
-
-// export default RootLayout;
