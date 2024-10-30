@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
-import { light } from "../utils/colors";
+import { colors } from "@/utils";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const BookSearch = () => {
@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: light.background,
+    backgroundColor: colors.light.background,
     alignItems: "center",
   },
   searchInput: {
     borderWidth: 2,
-    borderColor: light.secondary,
+    borderColor: colors.light.secondary,
     borderRadius: 1000,
     width: 300,
     height: 40,
