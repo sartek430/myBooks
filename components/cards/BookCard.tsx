@@ -10,22 +10,25 @@ import {
 import { light } from "../../utils/colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { BookModel } from "../../models/BookModel";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
-interface BookResultCardProps {
+interface BookCardProps {
   image: ImageSourcePropType;
   author: string;
   title: string;
   date: string;
   stars: number;
+  isInBookList: boolean;
 }
 
-const BookResultCard: React.FC<BookResultCardProps> = ({
+const BookCard: React.FC<BookCardProps> = ({
   image,
   author,
   title,
   date,
   stars,
-}: BookResultCardProps) => {
+  isInBookList,
+}: BookCardProps) => {
   const addBookToBookList = (): void => {
     const book: BookModel = {
       author,
@@ -56,7 +59,11 @@ const BookResultCard: React.FC<BookResultCardProps> = ({
         </View>
       </View>
       <Pressable style={styles.addBook} onPress={() => addBookToBookList()}>
-        <AntDesign name="pluscircleo" size={24} color={light.accent} />
+        {isInBookList ? (
+          <FontAwesome5 name="comment-alt" size={24} color={light.accent} />
+        ) : (
+          <AntDesign name="pluscircleo" size={24} color={light.accent} />
+        )}
       </Pressable>
     </View>
   );
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 16,
-    fontFamily: "Quicksand",
+    fontFamily: "PtSansCaption",
   },
   stars: {
     display: "flex",
@@ -107,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookResultCard;
+export default BookCard;

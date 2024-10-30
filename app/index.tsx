@@ -1,18 +1,42 @@
 import { StyleSheet, Text, View } from "react-native";
-import BookResultCard from "../components/cards/BookResultCard";
 import { light } from "../utils/colors";
+import BookSearch from "../screens/BookSearch";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import BookList from "../screens/BookList";
+import { Ionicons } from "@expo/vector-icons";
+import Account from "../screens/Account";
 
 const Page = () => {
+  const Tab = createBottomTabNavigator();
   return (
-    <View style={styles.container}>
-      <BookResultCard
-        image={require("../assets/Seigneur des Anneaux livre.jpeg")}
-        author="J.R.R.Tolkien"
-        title="The lord of the rings"
-        stars={3}
-        date="1954"
-      />
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => {
+          let iconName: "search" | "list" | "happy-outline" = "search";
+
+          if (route.name === "BookSearch") {
+            iconName = "search";
+          } else if (route.name === "BookList") {
+            iconName = "list";
+          } else if (route.name === "Account") {
+            iconName = "happy-outline";
+          }
+
+          return <Ionicons name={iconName} size={30} color={color} />;
+        },
+        tabBarActiveTintColor: light.secondary,
+        tabBarInactiveTintColor: light.background,
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: light.primary,
+          paddingBottom: 5,
+        },
+      })}
+    >
+      <Tab.Screen name="BookSearch" component={BookSearch} />
+      <Tab.Screen name="BookList" component={BookList} />
+      <Tab.Screen name="Account" component={Account} />
+    </Tab.Navigator>
   );
 };
 
