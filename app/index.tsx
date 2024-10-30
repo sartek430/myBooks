@@ -14,12 +14,18 @@ import { Redirect, useRouter, useSegments } from "expo-router";
 // import Login from "./(auth)/login";
 // import { useEffect } from "react";
 
+import BookSearch from "../screens/BookSearch";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import BookList from "../screens/BookList";
+import { Ionicons } from "@expo/vector-icons";
+import Account from "../screens/Account";
+
 const Page = () => {
   //   const router = useRouter();
   //   const segments = useSegments();
 
   const { user, isLoading } = AuthContext.useAuth();
-
+    
   //   useEffect(() => {
   //     const inAuthGroup = segments[0] === "(auth)";
 
@@ -31,7 +37,7 @@ const Page = () => {
   //   }, [user, isLoading]);
 
   console.log("user : ", user);
-
+    
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
@@ -41,15 +47,48 @@ const Page = () => {
     );
   }
 
+  const Tab = createBottomTabNavigator();
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
+    {/* <Button></Button> */}
+    {/* <Input placeholder="aaa" /> */}
+    {/* <Icons.AntDesign name="HTML" /> */}
+    {/* <Icons.EvilIcons name="search" size={24} color="#1F2937" /> */}
 
+
+    <View style={styles.container}>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         {user ? (
           <>
             <Text>Welcome, {user.email}</Text>
             <Button title="Logout" onPress={auth.logout} />
+            
+            
+            <Tab.Navigator screenOptions={({ route }) => ({tabBarIcon: ({ color }) => {
+                let iconName: "search" | "list" | "happy-outline" = "search";
+
+                if (route.name === "BookSearch") {
+                  iconName = "search";
+                } else if (route.name === "BookList") {
+                  iconName = "list";
+                } else if (route.name === "Account") {
+                  iconName = "happy-outline";
+                }
+
+                return <Ionicons name={iconName} size={30} color={color} />;
+              },
+                tabBarActiveTintColor: colors.light.secondary,
+                tabBarInactiveTintColor: colors.light.background,
+                headerShown: false,
+                tabBarStyle: {
+                  backgroundColor: colors.light.primary,
+                  paddingBottom: 5,
+                },
+              })}
+            >
+              <Tab.Screen name="BookSearch" component={BookSearch} />
+              <Tab.Screen name="BookList" component={BookList} />
+              <Tab.Screen name="Account" component={Account} />
+            </Tab.Navigator>
           </>
         ) : (
           <>
@@ -58,11 +97,6 @@ const Page = () => {
           </>
         )}
       </View>
-
-      {/* <Button></Button> */}
-      {/* <Input placeholder="aaa" /> */}
-      {/* <Icons.AntDesign name="HTML" /> */}
-      {/* <Icons.EvilIcons name="search" size={24} color="#1F2937" /> */}
     </View>
   );
 };
@@ -70,7 +104,7 @@ const Page = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.light.background,
     alignItems: "center",
     justifyContent: "center",
   },

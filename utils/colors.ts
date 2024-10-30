@@ -1,9 +1,9 @@
 const light = {
 	text: "#0f0804",
-	background: "#ebe5e0",
-	primary: "#A66330", //"#a76330",
-	secondary: "#D6B498", //"#c1e38c",
-	accent: "#90BC81" //"#f8964c"
+	background: "#EBE5E0",
+	primary: "#A66330",
+	secondary: "#D6B498",
+	accent: "#90BC81"
 };
 
 const dark = {
