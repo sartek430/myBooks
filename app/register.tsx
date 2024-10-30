@@ -22,11 +22,11 @@ const Register = () => {
     // () => auth.register(email, password);
     auth.register(email, password);
     // alert("Register");
-    router.replace("/login"); // Redirige vers la page d'accueil après l'inscription
+    router.replace("/"); // Redirige vers la page d'accueil après l'inscription
   };
 
   const goToLogin = () => {
-    router.replace("/login");
+    router.replace("/");
   };
 
   const image = {
