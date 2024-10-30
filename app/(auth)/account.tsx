@@ -11,7 +11,7 @@ const Account = () => {
   console.log("account", userId);
 
   const loadData = async () => {
-    const data = await db.user.me(userId!);
+    const data = await db.user.me();
     console.log(data);
   };
   loadData();
