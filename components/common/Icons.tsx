@@ -1,5 +1,5 @@
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import { AntDesign, EvilIcons, Ionicons } from "@expo/vector-icons";
 
-const Icons = { AntDesign, EvilIcons };
+const Icons = { AntDesign, EvilIcons, Ionicons };
 
 export default Icons;
