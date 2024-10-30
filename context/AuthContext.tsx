@@ -37,7 +37,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = firebase.config.auth.onAuthStateChanged((_user) => {
       //   console.log("onAuthStateChanged:", _user);
-      console.log("onAuthStateChanged");
+      console.log(`User ${_user ? "connected" : "disconnected"}`);
 
       setUser(_user); // Met à jour l'utilisateur
       setUserId(_user ? _user.uid : ""); // Met à jour l'ID de l'utilisateur
