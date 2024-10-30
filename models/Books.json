@@ -1,0 +1,38 @@
+[
+    {
+      "title": "L'étranger",
+      "author": "Albert Camus",
+      "date": "1942",
+      "stars": 5,
+      "image": "https://example.com/lestranger.jpg"
+    },
+    {
+      "title": "Le Petit Prince",
+      "author": "Antoine de Saint-Exupéry",
+      "date": "1943",
+      "stars": 5,
+      "image": "https://example.com/lepetitprince.jpg"
+    },
+    {
+      "title": "Les Misérables",
+      "author": "Victor Hugo",
+      "date": "1862",
+      "stars": 5,
+      "image": "https://example.com/lesmiserables.jpg"
+    },
+    {
+      "title": "Cyrano de Bergerac",
+      "author": "Edmond Rostand",
+      "date": "1897",
+      "stars": 4,
+      "image": "https://example.com/cyrano.jpg"
+    },
+    {
+      "title": "Madame Bovary",
+      "author": "Gustave Flaubert",
+      "date": "1857",
+      "stars": 4,
+      "image": "https://example.com/madamebovary.jpg"
+    }
+  ]
+  
