@@ -1,12 +1,10 @@
-import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
 import { AuthContext } from "@/context";
 import { auth } from "@/services";
 
 const Account = () => {
-  const { useAuth } = AuthContext;
-  const { user } = useAuth();
+  const { user } = AuthContext.useAuth();
 
   return (
     <View style={styles.container}>
