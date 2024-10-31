@@ -66,7 +66,12 @@ const getAll = async () => {
   //   console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
   // });
 
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+//   console.log(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+
+  return querySnapshot.docs.map((doc) => doc.data().bookId);
+  
+
+//   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
 // TODO : better error handling

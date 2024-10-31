@@ -6,8 +6,6 @@ import { Modal } from "@/components";
 import { DocumentData } from "firebase/firestore";
 import { db } from "@/services";
 
-const booksIds = ["qPmXqEfvyy0fVhNW8jIu"];
-
 const BookList = () => {
   const [myBooks, setMyBooks] = useState<(DocumentData | undefined)[]>([]);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -16,18 +14,13 @@ const BookList = () => {
   useEffect(() => {
     const loadBooks = async () => {
       try {
-        const userBooks = await db.userBooks.getAll();
-        const bookPromises = userBooks.map((userBook) =>
-          db.book.get(userBook.id)
-        );
+        const userBooksId = await db.userBooks.getAll();
+        //   console.log("ici : ", userBooks);
+
+        const bookPromises = userBooksId.map((id: string) => db.book.get(id));
         const books = await Promise.all(bookPromises);
-
+        console.log("books", books);
         setMyBooks(books);
-
-        booksIds.forEach(async (bookId) => {
-          const book = await db.book.get(bookId);
-          setMyBooks([...myBooks, book]);
-        });
       } catch (error) {
         console.error("Failed to load books:", error);
       }
