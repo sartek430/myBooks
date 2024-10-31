@@ -50,7 +50,6 @@ const BookList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My Book List</Text>
       {myBooks.length === 0 ? (
         <Text style={styles.noBooks}>You have no books</Text>
       ) : (
@@ -88,7 +87,6 @@ const BookList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: colors.light.background,
   },
   title: {

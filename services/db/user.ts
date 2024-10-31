@@ -66,9 +66,7 @@ const { db } = firebase.config;
 
 
 // TODO : better error handling
-const me = async () => {
-  const { userId } = AuthContext.useAuth();
-
+const me = async (userId: string) => {
   const docRef = doc(db, constants.USER_COLLECTION, userId);
 
   try {

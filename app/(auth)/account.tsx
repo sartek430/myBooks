@@ -1,25 +1,46 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
 import { AuthContext } from "@/contexts";
 import { auth } from "@/services";
 import { db } from "@/services";
 
-const Account = () => {
-  const { user, userId } = AuthContext.useAuth();
+type UserProps = {
+  lastname: string;
+  firstname: string;
+};
 
-  console.log("account", userId);
+const Account = () => {
+  const { userId } = AuthContext.useAuth();
+
+  const [myUser, setMyUser] = useState<UserProps | undefined>(undefined);
 
   const loadData = async () => {
-    const data = await db.user.me();
-    console.log(data);
+    try {
+      const data = await db.user.me(userId);
+      setMyUser({ firstname: data.firstname, lastname: data.lastname });
+    } catch (error) {
+      console.error("Failed to load user data:", error);
+    }
   };
-  loadData();
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Account</Text>
-      <Text>Welcome, {user?.email}</Text>
-      <Button title="Logout" onPress={auth.logout} />
+      {myUser ? (
+        <View style={styles.userInfo}>
+          <Text style={styles.welcomeMessage}>
+            Welcome, {myUser.firstname} {myUser.lastname}
+          </Text>
+          {/* <Text style={styles.userDetails}>First Name: {myUser.firstname}</Text> */}
+          {/* <Text style={styles.userDetails}>Last Name: {myUser.lastname}</Text> */}
+        </View>
+      ) : (
+        <Text>Loading user information...</Text>
+      )}
     </View>
   );
 };
@@ -27,7 +48,7 @@ const Account = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 10,
     backgroundColor: colors.light.background,
   },
   title: {
@@ -35,6 +56,30 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.light.text,
     fontFamily: "Quicksand",
+  },
+
+  //   container: {
+  //     flex: 1,
+  //     paddingTop: 50,
+  //     backgroundColor: "#fff",
+  //   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  userInfo: {
+    paddingHorizontal: 20,
+  },
+  welcomeMessage: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  userDetails: {
+    fontSize: 16,
+    marginBottom: 5,
   },
 });
 
