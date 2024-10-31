@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
+import { book } from "../../services/db";
 
 interface BookCardProps {
   isbn: string;
@@ -20,8 +21,20 @@ const BookCard: React.FC<BookCardProps> = ({
   date,
   stars,
   isInBookList,
-  onPress,
 }: BookCardProps) => {
+  const bookCardActionHandler = () => {
+    if (!isInBookList) {
+      const bookToAdd: BookDto = {
+        title: title,
+        author: author,
+        date: date,
+        stars: stars,
+        isbn: isbn,
+      };
+      book.add(bookToAdd);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -50,8 +63,7 @@ const BookCard: React.FC<BookCardProps> = ({
           ))}
         </View>
       </View>
-      <Pressable style={styles.addBook} onPress={onPress}>
-        {/* () => addBookToBookList() */}
+      <Pressable style={styles.addBook} onPress={() => bookCardActionHandler()}>
         {isInBookList ? (
           <FontAwesome5
             name="comment-alt"

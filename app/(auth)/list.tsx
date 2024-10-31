@@ -4,25 +4,26 @@ import { colors } from "@/utils";
 // import JSONBookList from "../../data/books.json";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
-
+import { DocumentData } from "firebase/firestore";
 import { db } from "@/services";
 
 const booksIds = ["qPmXqEfvyy0fVhNW8jIu"];
 
 const BookList = () => {
-  const [myBooks, setMyBooks] = useState([]);
+  const [myBooks, setMyBooks] = useState<(DocumentData | undefined)[]>([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedBook, setSelectedBook] = useState("");
 
   useEffect(() => {
     const loadBooks = async () => {
       try {
-        // const userBooks = await db.userBooks.getAll();
-        // const bookPromises = userBooks.map((userBook) =>
-        //   db.book.get(userBook.bookId)
-        // );
-        // const books = await Promise.all(bookPromises);
-        // setMyBooks(books);
+        const userBooks = await db.userBooks.getAll();
+        const bookPromises = userBooks.map((userBook) =>
+          db.book.get(userBook.id)
+        );
+        const books = await Promise.all(bookPromises);
+        console.log("books", books);
+        setMyBooks(books);
 
         booksIds.forEach(async (bookId) => {
           const book = await db.book.get(bookId);
@@ -48,18 +49,21 @@ const BookList = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Book List</Text>
-      {myBooks.map((book) => (
-        <BookCard
-          key={book.title}
-          title={book.title}
-          author={book.author}
-          date={book.date}
-          stars={book.stars}
-          isbn={book.isbn}
-          isInBookList={true}
-          onPress={() => onPress(book.title)}
-        />
-      ))}
+      {myBooks.map(
+        (book) =>
+          book && (
+            <BookCard
+              key={book.title}
+              title={book.title}
+              author={book.author}
+              date={book.date}
+              stars={book.stars}
+              isbn={book.isbn}
+              isInBookList={true}
+              onPress={() => onPress(book.title)}
+            />
+          )
+      )}
       <Modal
         isVisible={isModalVisible}
         setIsVisible={setModalVisible}
