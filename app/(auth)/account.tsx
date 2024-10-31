@@ -3,7 +3,6 @@ import { colors } from "@/utils";
 import { AuthContext } from "@/contexts";
 import { auth } from "@/services";
 import { db } from "@/services";
-// import { FirestoreUser } from "@/models";
 
 const Account = () => {
   const { user, userId } = AuthContext.useAuth();

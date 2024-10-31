@@ -12,6 +12,8 @@ import { colors } from "@/utils";
 import { useState } from "react";
 import { auth } from "@/services";
 
+// TODO: display toast message
+// TODO: regroup login and register in a single component
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
