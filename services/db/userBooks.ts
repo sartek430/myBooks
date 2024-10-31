@@ -1,5 +1,5 @@
 import { firebase } from "@/utils";
-import { collection, addDoc, getDocs, setDoc, doc, getDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, setDoc, doc, query, where, updateDoc } from "firebase/firestore";
 import { constants } from "@/utils";
 
 const { db } = firebase.config;
@@ -54,7 +54,7 @@ const update = async (userBookId: string, bookId: string, userId: string) => {
 	const docRef = doc(db, constants.USER_BOOKS_COLLECTION, userBookId);
 
 	try {
-		await setDoc(docRef, { bookId, userId });
+		await updateDoc(docRef, { bookId, userId });
 		console.log("Document successfully updated!");
 	} catch (error) {
 		console.error("Error updating document:", error);

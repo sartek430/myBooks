@@ -1,5 +1,5 @@
 import { firebase } from "@/utils";
-import { collection, addDoc, getDocs, setDoc, doc, getDoc, query, where, serverTimestamp, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, getDoc, query, where, serverTimestamp, updateDoc } from "firebase/firestore";
 import { constants } from "@/utils";
 
 const { db } = firebase.config;

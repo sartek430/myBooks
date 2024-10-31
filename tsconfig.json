@@ -4,25 +4,12 @@
     "strict": true,
 	"paths": {
 		// "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"],
-	//   "@/app": ["./app/*"],
-	  "@/assets": ["./assets/index"],
+	  "@/assets/*": ["./assets/*"],
 	  "@/components": ["./components/index"],
-	  "@/context": ["./context/index"],
+	  "@/contexts": ["./contexts/index"],
 	  "@/services": ["./services/index"],
 	  "@/utils": ["./utils/index"],
-	//   "@/screens": ["./screens/index"],
-	//   "@/navigation": ["./navigation/index"],
-	//   "@/store": ["./store/index"],
-	//   "@/hooks": ["./hooks/index"],
-	//   "@/constants": ["./constants/index"],
-	//   "@/types": ["./types/index"],
-	//   "@/styles": ["./styles/index"],
-	//   "@/config": ["./config/index"],
-	//   "@/i18n": ["./i18n/index"],
-	//   "@/theme": ["./theme/index"],
-	//   "@/helpers": ["./helpers/index"],
-	//   "@/api": ["./api/index"],
-	//   "@/*": ["./*"]
+	  "@/models": ["./models/index"],
 	}
   }
 }

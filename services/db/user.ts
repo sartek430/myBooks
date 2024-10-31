@@ -1,6 +1,6 @@
 import { firebase } from "@/utils";
 import { doc, getDoc, collection, addDoc, getDocs } from "firebase/firestore";
-import { AuthContext } from "@/context";
+import { AuthContext } from "@/contexts";
 import { constants } from "@/utils";
 
 const { db } = firebase.config;

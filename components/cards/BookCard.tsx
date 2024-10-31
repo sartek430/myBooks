@@ -1,12 +1,4 @@
-import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageSourcePropType,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
@@ -30,8 +22,6 @@ const BookCard: React.FC<BookCardProps> = ({
   isInBookList,
   onPress,
 }: BookCardProps) => {
-  const addBookToBookList = (): void => {};
-
   return (
     <View style={styles.container}>
       <Image

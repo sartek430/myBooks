@@ -4,35 +4,35 @@
       "author": "Albert Camus",
       "date": "1942",
       "stars": 5,
-      "image": "https://example.com/lestranger.jpg"
+	  "isbn": "987654345678"
     },
     {
       "title": "Le Petit Prince",
       "author": "Antoine de Saint-Exupéry",
       "date": "1943",
       "stars": 5,
-      "image": "https://example.com/lepetitprince.jpg"
-    },
+	  "isbn": "123456789012"
+	},
     {
       "title": "Les Misérables",
       "author": "Victor Hugo",
       "date": "1862",
       "stars": 5,
-      "image": "https://example.com/lesmiserables.jpg"
-    },
+	  "isbn": "234567890123"
+	},
     {
       "title": "Cyrano de Bergerac",
       "author": "Edmond Rostand",
       "date": "1897",
       "stars": 4,
-      "image": "https://example.com/cyrano.jpg"
+	  "isbn": "345678901234"
     },
     {
       "title": "Madame Bovary",
       "author": "Gustave Flaubert",
       "date": "1857",
       "stars": 4,
-      "image": "https://example.com/madamebovary.jpg"
+	  "isbn": "456789012345"
     }
   ]
   

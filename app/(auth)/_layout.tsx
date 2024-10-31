@@ -6,12 +6,11 @@ const AuthLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colors.light.secondary,
-        tabBarInactiveTintColor: colors.light.background,
-        // headerShown: false,
+        tabBarActiveTintColor: colors.light.background,
+        tabBarInactiveTintColor: colors.light.secondary,
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.light.primary,
-          //   paddingBottom: 5,
         },
       }}
     >
