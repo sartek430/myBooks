@@ -29,7 +29,6 @@ npm run start
 - Installer les fonts ✅
 - Load les fonts ✅
 - Importer les couleurs ✅
-- Installer tamagui (couleurs et le theming) ✅
 - Installer expo router ✅ https://docs.expo.dev/router/introduction/
 - Incorporer firebase ✅ (reste à associer à la console firebase)
 
