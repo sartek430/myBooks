@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text, FlatList } from "react-native";
 import { colors } from "@/utils";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { BookModel } from "@/models";
+// import { BookModel } from "@/models";
+import { BookModel } from "../../models/BookModel";
 import { BookCard } from "@/components";
 
 const BookSearch = () => {
@@ -63,6 +64,7 @@ const BookSearch = () => {
             date={item.date}
             stars={item.stars}
             isInBookList={item.isInBookList}
+            onPress={() => {}}
           />
         )}
       />

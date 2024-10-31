@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
-import JSONBookList from "@/models";
+import JSONBookList from "../../data/books.json";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
 
@@ -20,7 +20,7 @@ const BookList = () => {
   };
 
   const handleCommentSubmit = (comment: any) => {
-    console.log(`Commentaire pour le livre ${selectedBook.title}: ${comment}`);
+    // console.log(`Commentaire pour le livre ${selectedBook.title}: ${comment}`);
     setModalVisible(false);
     setSelectedBook(null);
   };
@@ -35,9 +35,9 @@ const BookList = () => {
           author={book.author}
           date={book.date}
           stars={book.stars}
-          image={book.image}
+          isbn={book.isbn}
           isInBookList={true}
-          onPress={() => onPress(book)}
+          onPress={() => {}}
         />
       ))}
       <Modal
