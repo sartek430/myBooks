@@ -72,7 +72,6 @@ const Comment = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My comments</Text>
       {myComments?.length === 0 ? (
         <Text style={styles.noComments}>You have no comments</Text>
       ) : (
@@ -106,7 +105,6 @@ const Comment = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: colors.light.background,
   },
   title: {
