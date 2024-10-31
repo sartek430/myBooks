@@ -6,67 +6,54 @@
 
 ### Présentation projet
 
-- Rédiger un document de présentation du projet (une page récapitulative des fonctionnalités, architecture choisie, technologies et packages utilisés).
+My books est un projet mobile de bibliothèque personnelle. Il est réalisé par Clément JAUNAY et Hugo VAYR et ses principales fonctionnalités sont :
+- La gestion de compte utilisateur (inscription, connexion, déconnexion)
+-	La recherche de livre depuis une barre de recherche, en fonction d’un titre, d’un nom d’auteur, d’une date ou d’un mot clé
+-	L’affichage des livres trouvés après la recherche avec ses informations (titre, auteur, date de parution et note)
+-	L’ajout de livre choisie dans une liste personnel
+-	L’ajout de commentaire sur les livres de notre liste
+-	L’affichage des livres inscrits dans la liste
+-	L’affichage des commentaires 
 
 ### Guide utilisateur
 
-- Rédiger un guide utilisateur pour expliquer comment utiliser l'application.
+Quand vous lancez l’application, le premier écran qui vous sera affiché, sera la page d’inscription et de connexion. 
+Il se compose de deux formulaires, l’un pour la connexion et l’autre pour l’inscription. Vous pouvez naviguez entre les deux formulaires via un bouton. Une fois que vous vous êtes connecté, vous obtenez l’accès à l’application.\
+Vous apercevez alors une barre de navigation en bas qui vous amène vers les pages disponibles du projet à savoir la page de recherche de livre, la liste de livre enregistrés dans votre bibliothèque personnelle, la page d’informations de votre compte et celle affichant vos commentaires sur vos livres de votre bibliothèque. La page de recherche comporte une barre de recherche.\
+Une fois la recherche faite, des cartes vont s’afficher pour chaque livre trouvé. Elles montrent le nom du livre, la première de couverture, la note globale via des étoiles et la première date de parution. En haut à droite, se trouve une icône « plus » qui vous indique que vous pouvez ajouter le livre à votre bibliothèque. Il y apparaitra dans la page « My book list ».\
+Cette page se compose également de carte, représentant un livre, avec ces mêmes infos. La seule différence se trouve aussi en haut à droite car l’icône « plus » s’est transformée en icone « bulle ». Si vous appuyez dessus, un formulaire apparaitra, vous permettant d’ajouter un commentaire sur ce livre. Ces derniers vous seront affichés dans la page « My comments ».
+
 
 ### Installation
-
-- Fournir un guide d’installation pour exécuter l’application en local (pré-requis, installation, etc). (dans le README)
 
 ```bash
 git clone https://github.com/sartek430/myBooks
 cd myBooks
+npm install
 npm run start
 ```
 
-### Feuille de route
+### Architecture
 
-- Installer les gestures et reanimated etc
-- Installer les icons
-- Installer les fonts
-- Load les fonts
-- Importer les couleurs
-- Voir tamagui pour les couleurs et le theming
-- Installer expo router
-- Incorporer firebase
+Notre projet comporte une architecture de dossier étudiée pour avoir la meilleure expérience de développement possible. Nos dossiers sont choisis pour faciliter la navigation, par le développeur, des fichiers du projet. Les fichiers sont tous rangés dans les dossiers leurs correspondants et ont leurs responsabilités qui leurs sont propres.\
+Voici comment se compose cette architecture : 
+- App (contient les pages du projet)
+- 	Assets (les images)
+-	Components (les composants réutilisé)
+-	Contexts (les contextes)
+-	Dto (les Data transfert Object. Pour insérer des données en base) 
+-	Models (des types d’objets)
+-	Services(les services qui gèrent les appels backend)
+-	Utils(couleurs, constantes, configurations)
 
-### Features
+### Technologies
 
-auth et stockage en temps réel firebase
-
-- Inscription et connexion sur la plateforme.
-- Recherche générale (titre, auteur) de livre. (barre de recherche, titre ou author. renvoie sous forme tableau les résultats. clique pour afficher détail)
-- Ajout de livre à ma collection de livre.
-- Ajout de commentaire sur mes livres.
-- Ajout d'un état de lecture sur un livre (à lire, en cours de lecture, lecture terminée. (état de livre : à lire, en cours, fini))
-- Modification information de compte + suppression de compte (avatar sur app bar pour modification information compte)
-
-### Navigation
-
-Utilisation de expo router car bien plus simple pour la navigation. pas besoin de spécifier toutes les interfaces de react navigation. File bases routing, group folder etc
-
-Bottom tabs navigation + stack navigation
-exemple de tab avec stack, chaque tab prend un stack navigator
-https://reactnavigation.org/docs/tab-based-navigation/#a-stack-navigator-for-each-tab
-
-- Tabs
-- - Home page (stack navigation)
-- - - Search page : affichage des livres selon la recherche. Clique sur un livre pour afficher son détail.
-- - - Detail page : détail d'un livre, ajout à ma collection.
-
-- - Library page (stack navigation)
-- - - List page : Mes livres présent dans ma collection, clique sur un livre pour afficher un détail moins poussé.
-- - - Detail page : détail d'un livre, suivi d'état de lecture.
-
-### Techno
-
-- Expo Blank TS
-- Package Google Fonts (@expo-google-fonts/)
-- Icons (@expo/vector-icons)
-- React Native Router (Expo Router ?) (@react-navigation)
+- React native avec expo
+- React
+- Firebase (authentication et firestore)
+- Expo router
+- Typescript
+- Google font
 
 # Branch name convention
 
