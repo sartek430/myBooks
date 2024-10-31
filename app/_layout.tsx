@@ -6,7 +6,7 @@ import {
 } from "@expo-google-fonts/pt-sans-caption"; // title
 import { Quicksand_400Regular } from "@expo-google-fonts/quicksand"; // body
 import { Slot, Stack, Redirect, useRouter, useSegments } from "expo-router";
-import { AuthContext } from "@/context";
+import { AuthContext } from "@/contexts";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/utils";
 

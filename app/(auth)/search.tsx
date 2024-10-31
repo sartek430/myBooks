@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text, FlatList } from "react-native";
 import { colors } from "@/utils";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { BookModel } from "../../models/BookModel";
-import BookCard from "../../components/cards/BookCard";
+import { BookModel } from "@/models";
+import { BookCard } from "@/components";
 
 const BookSearch = () => {
   const [inputValue, setInputValue] = useState("");

@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
-import { AuthContext } from "@/context";
+import { AuthContext } from "@/contexts";
 import { auth } from "@/services";
 import { db } from "@/services";
-// import { FirestoreUser } from "../../models/User";
+// import { FirestoreUser } from "@/models";
 
 const Account = () => {
   const { user, userId } = AuthContext.useAuth();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
-import JSONBookList from "../../models/Books.json"
+import JSONBookList from "@/models";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
 
@@ -28,7 +28,7 @@ const BookList = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Book List</Text>
-      {JSONBookList.map(book => (
+      {JSONBookList.map((book) => (
         <BookCard
           key={book.title}
           title={book.title}
