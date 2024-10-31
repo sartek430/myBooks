@@ -41,7 +41,7 @@ const get = async (commentId: string) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      console.log("Document data get comment:", docSnap.data());
       return docSnap.data();
     } else {
       // doc.data() will be undefined in this case
@@ -53,10 +53,10 @@ const get = async (commentId: string) => {
 };
 
 // TODO : better error handling
-const getAll = async (bookId: string) => {
+const getAll = async (userId: string) => {
   const q = query(
     collection(db, constants.COMMENT_COLLECTION),
-    where("bookId", "==", bookId)
+    where("userId", "==", userId)
   );
 
   // const querySnapshot = await getDocs(collection(db, constants.USER_BOOKS_COLLECTION));
@@ -64,9 +64,9 @@ const getAll = async (bookId: string) => {
 
   // querySnapshot.forEach((doc) => {
   //   console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-  // });
+  // });  
 
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return querySnapshot.docs.map((doc) => (doc.data()));
 };
 
 // TODO : better error handling

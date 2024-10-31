@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "#fff",
     height: 150,
-    width: 400,
+    width: 375,
     margin: 5,
     borderRadius: 10,
   },

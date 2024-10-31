@@ -34,7 +34,7 @@ const get = async (bookId: string) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      console.log("Document data get book :", docSnap.data());
       return { id: docSnap.id, ...docSnap.data() };
     } else {
       // doc.data() will be undefined in this case

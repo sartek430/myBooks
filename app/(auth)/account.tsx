@@ -25,16 +25,16 @@ const Account = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.light.secondary,
-    fontFamily: "Quicksand",
-  },
   container: {
     flex: 1,
     paddingTop: 50,
     backgroundColor: colors.light.background,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: colors.light.text,
+    fontFamily: "Quicksand",
   },
 });
 

@@ -75,7 +75,7 @@ const me = async () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      console.log("Document data get me user:", docSnap.data());
       return docSnap.data();
     } else {
       // doc.data() will be undefined in this case
