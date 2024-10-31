@@ -3,7 +3,6 @@ import { Button, View } from "react-native";
 import { Icons } from "@/components";
 import { colors } from "@/utils";
 import { auth } from "@/services";
-import Toast from "react-native-toast-message";
 
 const AuthLayout = () => {
   return (
@@ -70,14 +69,7 @@ const AuthLayout = () => {
               name="log-out-outline"
               color={colors.light.primary}
               style={{ marginRight: 10 }}
-              onPress={() => (
-                auth.logout(),
-                Toast.show({
-                  type: "success",
-                  text1: "Logged out",
-                  position: "bottom",
-                })
-              )}
+              onPress={auth.logout}
             />
           ),
           headerLeft: () => <View style={{ marginLeft: 10 }} />,

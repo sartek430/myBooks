@@ -11,24 +11,32 @@ import { useRouter } from "expo-router";
 import { colors } from "@/utils";
 import { useState } from "react";
 import { auth } from "@/services";
+import Toast from "react-native-toast-message";
+import { Icons } from "@/components";
 
 // TODO: display toast message
 // TODO: regroup login and register in a single component
-const Login = () => {
-  const [email, setEmail] = useState("a@a.com");
-  const [password, setPassword] = useState("azertyuiop");
+const Index = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isLogin, setIsLogin] = useState(true);
 
   const router = useRouter();
 
-  const handleLogin = () => {
-    auth.login(email, password);
-    // alert("Login");
-    // login();
-    router.replace("/"); // Redirige vers la page d'accueil après la connexion
-  };
+  const handleValidation = () => {
+    if (email === "" || password === "") {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "Error",
+        text2: "Please fill all the fields",
+        visibilityTime: 3000,
+        autoHide: true,
+      });
+    }
 
-  const goToRegister = () => {
-    router.replace("/register");
+    isLogin ? auth.login(email, password) : auth.register(email, password);
   };
 
   const image = {
@@ -36,13 +44,8 @@ const Login = () => {
   };
 
   return (
-    // <View style={styles.container}>
     <ImageBackground source={image} style={styles.image}>
-      {/* <View> */}
-      {/* <Text style={{ color: "white" }}>Login</Text> */}
-
       <View style={styles.container}>
-        {/* <Text style={styles.text}>Inside</Text> */}
         <TextInput
           style={styles.input}
           value={email}
@@ -59,6 +62,11 @@ const Login = () => {
           placeholderTextColor={colors.light.text}
         />
 
+        <Pressable onPress={handleValidation} style={styles.button}>
+          <Text style={styles.text}>{isLogin ? "Login" : "Register"}</Text>
+          <Icons.Ionicons name="log-in-outline" size={20} color="white" />
+        </Pressable>
+
         <View
           style={{
             flexDirection: "row",
@@ -67,23 +75,16 @@ const Login = () => {
           }}
         >
           <Text style={{ fontFamily: "Quicksand" }}>
-            Don't have an account ?{" "}
+            {isLogin ? "Don't have an account ?" : "Already have an account ?"}
           </Text>
           <Button
-            title="Sign up"
+            title={isLogin ? "Register" : "Login"}
             color={colors.light.primary}
-            onPress={goToRegister}
+            onPress={() => setIsLogin(!isLogin)}
           />
         </View>
-
-        <Pressable onPress={handleLogin} style={styles.button}>
-          <Text style={styles.text}>Loging in !</Text>
-        </Pressable>
-        {/* <View className="flex flex-row px-4 py-5 space-x-4"></View> */}
       </View>
-      {/* </View> */}
     </ImageBackground>
-    // </View>
   );
 };
 
@@ -118,8 +119,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    width: 76,
-    height: 20,
+    // width: 76,
+    // height: 20,
     // fontWeight: "bold",
     fontFamily: "Quicksand",
   },
@@ -132,7 +133,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     color: "white",
+    flexDirection: "row",
+    gap: 10,
   },
 });
 
-export default Login;
+export default Index;

@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
-import { book } from "../../services/db";
-import { userBooks } from "../../services/db";
+import { db } from "@/services";
 import { AuthContext } from "@/contexts";
+import Toast from "react-native-toast-message";
 
 interface BookCardProps {
   isbn: string;
@@ -42,8 +42,14 @@ const BookCard: React.FC<BookCardProps> = ({
       stars: stars,
       isbn: isbn,
     };
-    book.add(bookToAdd).then((bookId) => {
-      bookId ? userBooks.add(bookId, userId) : console.log("Error adding book");
+    db.book.add(bookToAdd).then((bookId) => {
+      bookId
+        ? db.userBooks.add(bookId, userId)
+        : Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "An error occured while adding the book",
+          });
     });
   };
 

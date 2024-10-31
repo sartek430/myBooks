@@ -8,6 +8,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { constants } from "@/utils";
+import Toast from "react-native-toast-message";
 
 const { db } = firebase.config;
 
@@ -20,9 +21,25 @@ const add = async (book: BookDto) => {
     });
 
     console.log("Document ajouté avec ID :", docRef.id);
+
+	Toast.show({
+		type: "success",
+		position: "bottom",
+		text1: "Livre ajouté à ma bibliothèque",
+		visibilityTime: 3000,
+		autoHide: true
+	});
     return docRef.id;
   } catch (e) {
-    console.error("Erreur lors de l'ajout du document :", e);
+    // console.error("Erreur lors de l'ajout du document :", e);
+
+	Toast.show({
+		type: "error",
+		position: "bottom",
+		text1: "Erreur lors de l'ajout du livre",
+		visibilityTime: 3000,
+		autoHide: true
+	});
   }
 };
 

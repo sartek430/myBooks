@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { colors } from "@/utils";
 import { AuthContext } from "@/contexts";
-import { auth } from "@/services";
 import { db } from "@/services";
+import LottieView from "lottie-react-native";
 
 type UserProps = {
   lastname: string;
@@ -14,6 +14,8 @@ const Account = () => {
   const { userId } = AuthContext.useAuth();
 
   const [myUser, setMyUser] = useState<UserProps | undefined>(undefined);
+
+  const confettiRef = useRef<LottieView>(null);
 
   const loadData = async () => {
     try {
@@ -31,13 +33,27 @@ const Account = () => {
   return (
     <View style={styles.container}>
       {myUser ? (
-        <View style={styles.userInfo}>
-          <Text style={styles.welcomeMessage}>
-            Welcome, {myUser.firstname} {myUser.lastname}
-          </Text>
-          {/* <Text style={styles.userDetails}>First Name: {myUser.firstname}</Text> */}
-          {/* <Text style={styles.userDetails}>Last Name: {myUser.lastname}</Text> */}
-        </View>
+        <>
+          <View style={styles.userInfo}>
+            <Pressable
+              style={styles.welcomeMessage}
+              onPress={() => confettiRef.current?.play(0)}
+            >
+              <Text>
+                Welcome, {myUser.firstname} {myUser.lastname}
+              </Text>
+            </Pressable>
+          </View>
+
+          <LottieView
+            ref={confettiRef}
+            source={require("../../assets/animation.json")}
+            autoPlay={false}
+            loop={false}
+            style={styles.lottie}
+            resizeMode="cover"
+          />
+        </>
       ) : (
         <Text>Loading user information...</Text>
       )}
@@ -51,25 +67,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.light.background,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.light.text,
-    fontFamily: "Quicksand",
-  },
-
-  //   container: {
-  //     flex: 1,
-  //     paddingTop: 50,
-  //     backgroundColor: "#fff",
-  //   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
   userInfo: {
     paddingHorizontal: 20,
   },
@@ -77,9 +74,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  userDetails: {
-    fontSize: 16,
-    marginBottom: 5,
+  hiddenButton: {
+    opacity: 100, // Make the button invisible
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    borderWidth: 1,
+  },
+  lottie: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    pointerEvents: "none",
   },
 });
 
