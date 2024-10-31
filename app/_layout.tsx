@@ -9,6 +9,7 @@ import { Slot, useRouter, useSegments } from "expo-router";
 import { AuthContext } from "@/contexts";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/utils";
+import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,6 +34,7 @@ export default () => {
   return (
     <AuthProvider>
       <RootLayout />
+      <Toast />
     </AuthProvider>
   );
 };

@@ -17,7 +17,7 @@ const AuthLayout = () => {
       <Tabs.Screen
         name="search"
         options={{
-          title: "BookSearch",
+          title: "Search",
           tabBarIcon: ({ color }) => (
             <Icons.Ionicons size={28} name="search" color={color} />
           ),
@@ -26,9 +26,18 @@ const AuthLayout = () => {
       <Tabs.Screen
         name="list"
         options={{
-          title: "BookList",
+          title: "List",
           tabBarIcon: ({ color }) => (
             <Icons.Ionicons size={28} name="list" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="comment"
+        options={{
+          title: "Comments",
+          tabBarIcon: ({ color }) => (
+            <Icons.Ionicons size={28} name="chatbox-outline" color={color} />
           ),
         }}
       />
