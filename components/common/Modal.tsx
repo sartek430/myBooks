@@ -27,7 +27,7 @@ const Modal = ({
   const { userId } = AuthContext.useAuth();
   const handleSubmit = () => {
     db.comment.add(selectedBookId, comment, userId);
-    console.log(`Commentaire pour le livre ${selectedBookId}: ${comment}`);
+    // console.log(`Commentaire pour le livre ${selectedBookId}: ${comment}`);
 
     setComment("");
     setIsVisible(false);
@@ -38,18 +38,21 @@ const Modal = ({
   }
 
   return (
-    <ModalRN visible={isVisible}>
-      <View style={styles.modal}>
-        <Text style={styles.title}>Ajouter un commentaire</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Tapez votre commentaire"
-          value={comment}
-          onChangeText={setComment}
-        />
-        <View style={styles.buttons}>
-          <Button title="Fermer" onPress={onClose} />
-          <Button title="Envoyer" onPress={handleSubmit} />
+    <ModalRN visible={isVisible} transparent={true} animationType="slide">
+      <View style={styles.overlay}>
+        <View style={styles.modal}>
+          <Text style={styles.title}>Ajouter un commentaire</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Tapez votre commentaire"
+            value={comment}
+            onChangeText={setComment}
+            multiline
+          />
+          <View style={styles.buttons}>
+            <Button title="Fermer" onPress={onClose} color="#ff5c5c" />
+            <Button title="Envoyer" onPress={handleSubmit} color="#4CAF50" />
+          </View>
         </View>
       </View>
     </ModalRN>
@@ -57,26 +60,44 @@ const Modal = ({
 };
 
 const styles = StyleSheet.create({
-  modal: {
+  overlay: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modal: {
+    width: "90%",
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: "bold",
     marginBottom: 20,
   },
   input: {
-    width: "80%",
-    padding: 10,
-    backgroundColor: "white",
+    width: "100%",
+    padding: 15,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 5,
     marginBottom: 20,
+    textAlignVertical: "top",
   },
   buttons: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "80%",
+    width: "100%",
   },
 });
 

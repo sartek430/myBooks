@@ -9,8 +9,6 @@ const BookSearch = () => {
   const [inputValue, setInputValue] = useState("");
   const [books, setBooks] = useState<BookModel[]>();
 
-  useEffect(() => {}, [books]);
-
   const searchBook = async (inputValue: string) => {
     try {
       const encodedQuery = encodeURIComponent(inputValue);
