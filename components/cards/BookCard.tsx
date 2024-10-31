@@ -18,6 +18,7 @@ interface BookCardProps {
   date: string;
   stars: number;
   isInBookList: boolean;
+  onPress: () => void;
 }
 
 const BookCard: React.FC<BookCardProps> = ({
@@ -27,6 +28,7 @@ const BookCard: React.FC<BookCardProps> = ({
   date,
   stars,
   isInBookList,
+  onPress,
 }: BookCardProps) => {
   const addBookToBookList = (): void => {};
 
@@ -58,7 +60,8 @@ const BookCard: React.FC<BookCardProps> = ({
           ))}
         </View>
       </View>
-      <Pressable style={styles.addBook} onPress={() => addBookToBookList()}>
+      <Pressable style={styles.addBook} onPress={onPress}>
+        {/* () => addBookToBookList() */}
         {isInBookList ? (
           <FontAwesome5
             name="comment-alt"
