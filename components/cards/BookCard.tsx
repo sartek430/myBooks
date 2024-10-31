@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageSourcePropType,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
+import { book } from "../../services/db";
 
 interface BookCardProps {
   isbn: string;
@@ -28,7 +22,15 @@ const BookCard: React.FC<BookCardProps> = ({
   stars,
   isInBookList,
 }: BookCardProps) => {
-  const addBookToBookList = (): void => {};
+  const bookCardActionHandler = (): void => {
+    if (!isInBookList) {
+      addBookToBookList();
+    }
+  };
+
+  const addBookToBookList = async (): Promise<void> => {
+    await book.add(author, title);
+  };
 
   return (
     <View style={styles.container}>
@@ -58,7 +60,7 @@ const BookCard: React.FC<BookCardProps> = ({
           ))}
         </View>
       </View>
-      <Pressable style={styles.addBook} onPress={() => addBookToBookList()}>
+      <Pressable style={styles.addBook} onPress={() => bookCardActionHandler()}>
         {isInBookList ? (
           <FontAwesome5
             name="comment-alt"
