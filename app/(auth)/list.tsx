@@ -1,34 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { colors } from "@/utils";
-import JSONBookList from "../../data/books.json";
+// import JSONBookList from "../../data/books.json";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
 
-const BookList = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+import { db } from "@/services";
 
-  const onPress = (book: React.SetStateAction<null>) => {
-    setSelectedBook(book);
+const booksIds = ["qPmXqEfvyy0fVhNW8jIu"];
+
+const BookList = () => {
+  const [myBooks, setMyBooks] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedBook, setSelectedBook] = useState("");
+
+  useEffect(() => {
+    const loadBooks = async () => {
+      try {
+        // const userBooks = await db.userBooks.getAll();
+        // const bookPromises = userBooks.map((userBook) =>
+        //   db.book.get(userBook.bookId)
+        // );
+        // const books = await Promise.all(bookPromises);
+        // setMyBooks(books);
+
+        booksIds.forEach(async (bookId) => {
+          const book = await db.book.get(bookId);
+          setMyBooks([...myBooks, book]);
+        });
+      } catch (error) {
+        console.error("Failed to load books:", error);
+      }
+    };
+
+    loadBooks();
+  }, []);
+
+  const onPress = (title: string) => {
+    setSelectedBook(title);
     setModalVisible(true);
   };
-
   const handleModalClose = () => {
+    setSelectedBook("");
     setModalVisible(false);
-    setSelectedBook(null);
-  };
-
-  const handleCommentSubmit = (comment: any) => {
-    // console.log(`Commentaire pour le livre ${selectedBook.title}: ${comment}`);
-    setModalVisible(false);
-    setSelectedBook(null);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Book List</Text>
-      {JSONBookList.map((book) => (
+      {myBooks.map((book) => (
         <BookCard
           key={book.title}
           title={book.title}
@@ -37,13 +57,14 @@ const BookList = () => {
           stars={book.stars}
           isbn={book.isbn}
           isInBookList={true}
-          onPress={() => {}}
+          onPress={() => onPress(book.title)}
         />
       ))}
       <Modal
         isVisible={isModalVisible}
+        setIsVisible={setModalVisible}
+        selectedBook={selectedBook}
         onClose={handleModalClose}
-        onSubmit={handleCommentSubmit}
       />
     </View>
   );
