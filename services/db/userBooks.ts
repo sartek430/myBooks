@@ -1,12 +1,15 @@
 import { firebase } from "@/utils";
 import { collection, addDoc, getDocs, setDoc, doc, query, where, updateDoc } from "firebase/firestore";
 import { constants } from "@/utils";
+import { AuthContext } from "@/contexts";
 
 const { db } = firebase.config;
 
 // TODO : better error handling
 // TODO : verif if doc already exists
-const add = async (bookId: string, userId: string) => {
+const add = async (bookId: string) => {
+	const { userId } = AuthContext.useAuth();
+
 	try {
 		const docRef = await addDoc(collection(db, constants.USER_BOOKS_COLLECTION), { bookId, userId });
 
@@ -36,7 +39,9 @@ const add = async (bookId: string, userId: string) => {
 // };
 
 // TODO : better error handling
-const getAll = async (userId: string) => {
+const getAll = async () => {
+	const { userId } = AuthContext.useAuth();
+
 	const q = query(collection(db, constants.USER_BOOKS_COLLECTION), where("userId", "==", userId));
 
 	// const querySnapshot = await getDocs(collection(db, constants.USER_BOOKS_COLLECTION));
@@ -50,7 +55,9 @@ const getAll = async (userId: string) => {
 };
 
 // TODO : better error handling
-const update = async (userBookId: string, bookId: string, userId: string) => {
+const update = async (userBookId: string, bookId: string) => {
+	const { userId } = AuthContext.useAuth();
+
 	const docRef = doc(db, constants.USER_BOOKS_COLLECTION, userBookId);
 
 	try {
