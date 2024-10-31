@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,11 @@ import {
   Pressable,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { BookModel } from "../../models/BookModel";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
 
 interface BookCardProps {
-  image: ImageSourcePropType;
+  isbn: string;
   author: string;
   title: string;
   date: string;
@@ -23,7 +22,7 @@ interface BookCardProps {
 }
 
 const BookCard: React.FC<BookCardProps> = ({
-  image,
+  isbn,
   author,
   title,
   date,
@@ -31,28 +30,24 @@ const BookCard: React.FC<BookCardProps> = ({
   isInBookList,
   onPress,
 }: BookCardProps) => {
-  // const addBookToBookList = (): void => {
-  //   const book: BookModel = {
-  //     author,
-  //     title,
-  //     date,
-  //     stars,
-  //     image: image.toString(),
-  //   };
-
-  //   console.log(book);
-  // };
+  const addBookToBookList = (): void => {};
 
   return (
     <View style={styles.container}>
       <Image
         style={{ width: 70, height: 100, marginLeft: 10 }}
         resizeMode="contain"
-        source={image}
+        source={
+          isbn
+            ? { uri: `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg` }
+            : require("../../assets/default-book-cover.jpeg")
+        }
       ></Image>
       <View style={styles.description}>
         <Text style={styles.author}>{author}</Text>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={3}>
+          {title.substring(0, 100)}
+        </Text>
         <Text style={styles.date}>{date}</Text>
         <View style={styles.stars}>
           {[...Array(stars)].map((e, i) => (
@@ -65,7 +60,8 @@ const BookCard: React.FC<BookCardProps> = ({
           ))}
         </View>
       </View>
-      <Pressable style={styles.addBook} onPress={onPress}>{/* () => addBookToBookList() */}
+      <Pressable style={styles.addBook} onPress={onPress}>
+        {/* () => addBookToBookList() */}
         {isInBookList ? (
           <FontAwesome5
             name="comment-alt"
@@ -88,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "#fff",
     height: 150,
-    width: "95%",
+    width: 400,
     margin: 5,
     borderRadius: 10,
   },
@@ -106,12 +102,13 @@ const styles = StyleSheet.create({
     color: colors.light.primary,
   },
   title: {
-    fontSize: 18,
+    fontSize: 12,
+    width: 300,
     fontFamily: "Quicksand",
   },
   date: {
     fontSize: 16,
-    fontFamily: "PtSansCaption",
+    fontFamily: "Quicksand",
   },
   stars: {
     display: "flex",
