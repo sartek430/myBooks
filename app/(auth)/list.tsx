@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { colors } from "@/utils";
-// import JSONBookList from "../../data/books.json";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
 import { DocumentData } from "firebase/firestore";
@@ -22,7 +21,7 @@ const BookList = () => {
           db.book.get(userBook.id)
         );
         const books = await Promise.all(bookPromises);
-        console.log("books", books);
+
         setMyBooks(books);
 
         booksIds.forEach(async (bookId) => {

@@ -3,6 +3,8 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
 import { book } from "../../services/db";
+import { userBooks } from "../../services/db";
+import { AuthContext } from "@/contexts";
 
 interface BookCardProps {
   isbn: string;
@@ -22,6 +24,7 @@ const BookCard: React.FC<BookCardProps> = ({
   stars,
   isInBookList,
 }: BookCardProps) => {
+  const { userId } = AuthContext.useAuth();
   const bookCardActionHandler = () => {
     if (!isInBookList) {
       const bookToAdd: BookDto = {
@@ -31,7 +34,11 @@ const BookCard: React.FC<BookCardProps> = ({
         stars: stars,
         isbn: isbn,
       };
-      book.add(bookToAdd);
+      book.add(bookToAdd).then((bookId) => {
+        bookId
+          ? userBooks.add(bookId, userId)
+          : console.log("Error adding book");
+      });
     }
   };
 

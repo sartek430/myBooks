@@ -16,8 +16,8 @@ const { db } = firebase.config;
 
 // TODO : better error handling
 // TODO : verif if doc already exists
-const add = async (bookId: string) => {
-  const { userId } = AuthContext.useAuth();
+const add = async (bookId: string, userId: string) => {
+  console.log("userId", userId);
 
   try {
     const docRef = await addDoc(
@@ -25,7 +25,7 @@ const add = async (bookId: string) => {
       { bookId, userId }
     );
 
-    console.log("Document ajouté avec ID :", docRef.id);
+    console.log("Livre ajouté au user :", docRef.id);
   } catch (e) {
     console.error("Erreur lors de l'ajout du document :", e);
   }

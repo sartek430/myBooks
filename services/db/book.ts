@@ -20,6 +20,7 @@ const add = async (book: BookDto) => {
     });
 
     console.log("Document ajouté avec ID :", docRef.id);
+    return docRef.id;
   } catch (e) {
     console.error("Erreur lors de l'ajout du document :", e);
   }
