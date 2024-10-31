@@ -8,25 +8,26 @@ import {
   Modal as ModalRN,
 } from "react-native";
 import { db } from "@/services";
+import { AuthContext } from "@/contexts";
 
 type TModalProps = {
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
-  selectedBook: string;
+  selectedBookId: string;
   onClose: () => void;
 };
 
 const Modal = ({
   isVisible,
   setIsVisible,
-  selectedBook,
+  selectedBookId,
   onClose,
 }: TModalProps) => {
   const [comment, setComment] = useState("");
-
+  const { userId } = AuthContext.useAuth();
   const handleSubmit = () => {
-    // db.comment.add(selectedBook, comment);
-    console.log(`Commentaire pour le livre ${selectedBook}: ${comment}`);
+    db.comment.add(selectedBookId, comment, userId);
+    console.log(`Commentaire pour le livre ${selectedBookId}: ${comment}`);
 
     setComment("");
     setIsVisible(false);

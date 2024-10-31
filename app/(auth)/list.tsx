@@ -5,21 +5,21 @@ import { BookCard } from "@/components";
 import { Modal } from "@/components";
 import { DocumentData } from "firebase/firestore";
 import { db } from "@/services";
+import { AuthContext } from "@/contexts";
 
 const BookList = () => {
+  const { userId } = AuthContext.useAuth();
   const [myBooks, setMyBooks] = useState<(DocumentData | undefined)[]>([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedBook, setSelectedBook] = useState("");
+  const [selectedBookId, setSelectedBook] = useState("");
 
   useEffect(() => {
     const loadBooks = async () => {
       try {
-        const userBooksId = await db.userBooks.getAll();
-        //   console.log("ici : ", userBooks);
+        const userBooksId = await db.userBooks.getAll(userId);
 
         const bookPromises = userBooksId.map((id: string) => db.book.get(id));
         const books = await Promise.all(bookPromises);
-        console.log("books", books);
         setMyBooks(books);
       } catch (error) {
         console.error("Failed to load books:", error);
@@ -29,8 +29,8 @@ const BookList = () => {
     loadBooks();
   }, []);
 
-  const onPress = (title: string) => {
-    setSelectedBook(title);
+  const onPress = (id: string) => {
+    setSelectedBook(id);
     setModalVisible(true);
   };
   const handleModalClose = () => {
@@ -52,14 +52,14 @@ const BookList = () => {
               stars={book.stars}
               isbn={book.isbn}
               isInBookList={true}
-              onPress={() => onPress(book.title)}
+              onPress={() => onPress(book.id)}
             />
           )
       )}
       <Modal
         isVisible={isModalVisible}
         setIsVisible={setModalVisible}
-        selectedBook={selectedBook}
+        selectedBookId={selectedBookId}
         onClose={handleModalClose}
       />
     </View>

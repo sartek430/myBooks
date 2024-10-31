@@ -17,8 +17,6 @@ const { db } = firebase.config;
 // TODO : better error handling
 // TODO : verif if doc already exists
 const add = async (bookId: string, userId: string) => {
-  console.log("userId", userId);
-
   try {
     const docRef = await addDoc(
       collection(db, constants.USER_BOOKS_COLLECTION),
@@ -51,27 +49,17 @@ const add = async (bookId: string, userId: string) => {
 // };
 
 // TODO : better error handling
-const getAll = async () => {
-  const { userId } = AuthContext.useAuth();
-
+const getAll = async (userId: string) => {
   const q = query(
     collection(db, constants.USER_BOOKS_COLLECTION),
     where("userId", "==", userId)
   );
 
-  // const querySnapshot = await getDocs(collection(db, constants.USER_BOOKS_COLLECTION));
   const querySnapshot = await getDocs(q);
 
-  // querySnapshot.forEach((doc) => {
-  //   console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-  // });
-
-//   console.log(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-
   return querySnapshot.docs.map((doc) => doc.data().bookId);
-  
 
-//   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  //   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
 // TODO : better error handling
