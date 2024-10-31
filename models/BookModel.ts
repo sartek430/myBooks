@@ -3,5 +3,6 @@ export interface BookModel {
   author: string;
   date: string;
   stars: number;
-  image: string;
+  isbn: string;
+  isInBookList: boolean;
 }
