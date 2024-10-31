@@ -1,49 +1,66 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { colors } from "@/utils";
-import JSONBookList from "../../data/books.json";
 import { BookCard } from "@/components";
 import { Modal } from "@/components";
+import { DocumentData } from "firebase/firestore";
+import { db } from "@/services";
 
 const BookList = () => {
+  const [myBooks, setMyBooks] = useState<(DocumentData | undefined)[]>([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedBook, setSelectedBook] = useState("");
 
-  const onPress = (book: React.SetStateAction<null>) => {
-    setSelectedBook(book);
+  useEffect(() => {
+    const loadBooks = async () => {
+      try {
+        const userBooksId = await db.userBooks.getAll();
+        //   console.log("ici : ", userBooks);
+
+        const bookPromises = userBooksId.map((id: string) => db.book.get(id));
+        const books = await Promise.all(bookPromises);
+        console.log("books", books);
+        setMyBooks(books);
+      } catch (error) {
+        console.error("Failed to load books:", error);
+      }
+    };
+
+    loadBooks();
+  }, []);
+
+  const onPress = (title: string) => {
+    setSelectedBook(title);
     setModalVisible(true);
   };
-
   const handleModalClose = () => {
+    setSelectedBook("");
     setModalVisible(false);
-    setSelectedBook(null);
-  };
-
-  const handleCommentSubmit = (comment: any) => {
-    // console.log(`Commentaire pour le livre ${selectedBook.title}: ${comment}`);
-    setModalVisible(false);
-    setSelectedBook(null);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Book List</Text>
-      {JSONBookList.map((book) => (
-        <BookCard
-          key={book.title}
-          title={book.title}
-          author={book.author}
-          date={book.date}
-          stars={book.stars}
-          isbn={book.isbn}
-          isInBookList={true}
-          onPress={() => {}}
-        />
-      ))}
+      {myBooks.map(
+        (book) =>
+          book && (
+            <BookCard
+              key={book.title}
+              title={book.title}
+              author={book.author}
+              date={book.date}
+              stars={book.stars}
+              isbn={book.isbn}
+              isInBookList={true}
+              onPress={() => onPress(book.title)}
+            />
+          )
+      )}
       <Modal
         isVisible={isModalVisible}
+        setIsVisible={setModalVisible}
+        selectedBook={selectedBook}
         onClose={handleModalClose}
-        onSubmit={handleCommentSubmit}
       />
     </View>
   );

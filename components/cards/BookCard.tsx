@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "@/utils";
+import { book } from "../../services/db";
+import { userBooks } from "../../services/db";
+import { AuthContext } from "@/contexts";
 
 interface BookCardProps {
   isbn: string;
@@ -22,6 +25,28 @@ const BookCard: React.FC<BookCardProps> = ({
   isInBookList,
   onPress,
 }: BookCardProps) => {
+  const { userId } = AuthContext.useAuth();
+  const bookCardActionHandler = () => {
+    if (!isInBookList) {
+      addBook();
+    } else {
+      onPress();
+    }
+  };
+
+  const addBook = async () => {
+    const bookToAdd: BookDto = {
+      title: title,
+      author: author,
+      date: date,
+      stars: stars,
+      isbn: isbn,
+    };
+    book.add(bookToAdd).then((bookId) => {
+      bookId ? userBooks.add(bookId, userId) : console.log("Error adding book");
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -50,8 +75,7 @@ const BookCard: React.FC<BookCardProps> = ({
           ))}
         </View>
       </View>
-      <Pressable style={styles.addBook} onPress={onPress}>
-        {/* () => addBookToBookList() */}
+      <Pressable style={styles.addBook} onPress={() => bookCardActionHandler()}>
         {isInBookList ? (
           <FontAwesome5
             name="comment-alt"

@@ -1,14 +1,19 @@
 import { firebase } from "@/utils";
 import { collection, addDoc, getDocs, doc, getDoc, query, where, serverTimestamp, updateDoc } from "firebase/firestore";
 import { constants } from "@/utils";
+import { AuthContext } from "@/contexts";
 
 const { db } = firebase.config;
 
 // TODO : better error handling
 // TODO : verif if doc already exists
-const add = async (bookId: string, message: string, userId: string) => {
+const add = async (bookId: string, message: string) => {
+	const { userId } = AuthContext.useAuth();
+
 	try {
-		const docRef = await addDoc(collection(db, constants.COMMENT_COLLECTION), { bookId, creationDate: serverTimestamp(), message, userId });
+		const docRef = await addDoc(collection(db, constants.COMMENT_COLLECTION),
+			{ bookId, creationDate: serverTimestamp(), message, updateDate: serverTimestamp(), userId }
+		);
 
 		console.log("Document ajouté avec ID :", docRef.id);
 	} catch (e) {
