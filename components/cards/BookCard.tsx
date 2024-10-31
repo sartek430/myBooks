@@ -23,23 +23,28 @@ const BookCard: React.FC<BookCardProps> = ({
   date,
   stars,
   isInBookList,
+  onPress,
 }: BookCardProps) => {
   const { userId } = AuthContext.useAuth();
   const bookCardActionHandler = () => {
     if (!isInBookList) {
-      const bookToAdd: BookDto = {
-        title: title,
-        author: author,
-        date: date,
-        stars: stars,
-        isbn: isbn,
-      };
-      book.add(bookToAdd).then((bookId) => {
-        bookId
-          ? userBooks.add(bookId, userId)
-          : console.log("Error adding book");
-      });
+      addBook();
+    } else {
+      onPress();
     }
+  };
+
+  const addBook = async () => {
+    const bookToAdd: BookDto = {
+      title: title,
+      author: author,
+      date: date,
+      stars: stars,
+      isbn: isbn,
+    };
+    book.add(bookToAdd).then((bookId) => {
+      bookId ? userBooks.add(bookId, userId) : console.log("Error adding book");
+    });
   };
 
   return (
